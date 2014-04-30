@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
 {
-    public static class ObjectTracker
+    internal static class ObjectTracker
     {
         private static readonly object Monitor = new object();
         private static readonly List<WeakReference> Objects = new List<WeakReference>();

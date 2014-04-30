@@ -12,7 +12,7 @@
         </Grid.ColumnDefinitions>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ListBox DisplayMemberPath="Name" ItemsSource="{Binding Samples}" SelectionChanged="SampleList_SelectionChanged" />
+            <ListBox DisplayMemberPath="Name" ItemsSource="{Binding Samples}" SelectionChanged="SampleListOnSelectionChanged" />
         </ScrollViewer>
 
         <GridSplitter Grid.Column="1" Width="5" ShowsPreview="True" HorizontalAlignment="Center"/>

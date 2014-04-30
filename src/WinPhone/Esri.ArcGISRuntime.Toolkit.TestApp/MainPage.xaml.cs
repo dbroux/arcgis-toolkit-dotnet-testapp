@@ -1,30 +1,36 @@
-﻿using Microsoft.Phone.Controls;
-using System;
-using System.Windows.Controls;
+﻿using Windows.UI.Xaml.Controls.Primitives;
+using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Esri.ArcGISRuntime.Toolkit.TestApp
 {
-	public partial class MainPage : PhoneApplicationPage
-	{
-		// Constructor
-		public MainPage()
-		{
-			InitializeComponent();
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class MainPage : Page
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        /// </summary>
+        public MainPage()
+        {
+            InitializeComponent();
 
-			// Sample code to localize the ApplicationBar
-			//BuildLocalizedApplicationBar();
-			DataContext = SampleDatasource.Current;
-		}
+            NavigationCacheMode = NavigationCacheMode.Required;
+            DataContext = SampleDatasource.Current;
+        }
 
-		private void SampleList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var selector = sender as LongListSelector;
-			if (selector == null || selector.SelectedItem == null)
-				return;
-			var pagetype = (selector.SelectedItem as Sample).Page;
-			string url = "/Samples/" + pagetype.Name + ".xaml";
-			NavigationService.Navigate(new Uri(url, UriKind.Relative));
-			selector.SelectedItem = null;
-		}
-	}
+        private void SampleListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selector = sender as Selector;
+            if (selector == null || !(selector.SelectedItem is Sample))
+                return;
+
+            ObjectTracker.GarbageCollect();
+            var pagetype = (selector.SelectedItem as Sample).Page;
+            Frame.Navigate(pagetype);
+            selector.SelectedItem = null;
+        }
+    }
 }

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9a2f87f5-618b-49a1-abc3-c09366fc368d</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Esri.ArcGISRuntime.Toolkit.TestApp</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\MultiplicationConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ObjectToObjectConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringJoinConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\ObjectTracker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\TocControl.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Utils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SampleDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\AttributionSample.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\LegendSample.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\ScaleLineSample.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\TemplatePickerSample.xaml.cs" />
+  </ItemGroup>
+</Project>

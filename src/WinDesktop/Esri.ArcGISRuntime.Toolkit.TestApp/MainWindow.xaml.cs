@@ -5,24 +5,26 @@ using System.Windows.Controls;
 
 namespace Esri.ArcGISRuntime.Toolkit.TestApp
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : Window
-	{
-		public MainWindow()
-		{
-			InitializeComponent();
-			DataContext = SampleDatasource.Current;
-		}
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MainWindow"/> class.
+        /// </summary>
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = SampleDatasource.Current;
+        }
 
-
-		private void SampleList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-			var pagetype = ((Sample) ((ListBox) sender).SelectedItem).Page;
-			string url = "Samples/" + pagetype.Name + ".xaml";
-			MainFrame.Navigate(new Uri(url, UriKind.RelativeOrAbsolute));
-			ObjectTracker.GarbageCollect();
-		}
-	}
+        private void SampleListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var pagetype = ((Sample) ((ListBox) sender).SelectedItem).Page;
+            string url = "Samples/" + pagetype.Name + ".xaml";
+            MainFrame.Navigate(new Uri(url, UriKind.RelativeOrAbsolute));
+            ObjectTracker.GarbageCollect();
+        }
+    }
 }

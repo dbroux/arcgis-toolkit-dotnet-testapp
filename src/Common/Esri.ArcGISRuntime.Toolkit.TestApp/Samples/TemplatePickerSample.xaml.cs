@@ -8,11 +8,6 @@ using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
 #if NETFX_CORE
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-#elif SILVERLIGHT
-using System;
-using System.Windows;
 #else
 using System.Windows;
 #endif
@@ -24,11 +19,17 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
     /// </summary>
     public partial class TemplatePickerSample
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TemplatePickerSample"/> class.
+        /// </summary>
         public TemplatePickerSample()
         {
             InitializeComponent();
-#if !WINDOWS_PHONE
-            MyTOCControl.Message += (s, message) => LogMessage(message);
+#if WINDOWS_PHONE_APP
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled; // cache needed when coming back from TOC
+            var navigationHelper = new NavigationHelper(this);
+#else
+            MyTocControl.Message += (s, message) => LogMessage(message);
 #endif
             Utils.LogMapViewEvents(MyMapView, LogMessage);
             ObjectTracker.Track(this);
@@ -59,11 +60,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyTemplatePicker.Layers);
         }
 
-#if WINDOWS_PHONE
-        private void TestMemoryLeak(object sender, EventArgs e)
-#else
         private void TestMemoryLeak(object sender, RoutedEventArgs e)
-#endif
         {
             // Create a template picker that should be released immediatly since no more referenced
             var templatePicker = new Controls.TemplatePicker {Layers = MyTemplatePicker.Layers};
@@ -71,12 +68,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             LogMessage(ObjectTracker.GarbageCollect());
         }
 
-
-#if WINDOWS_PHONE
-        private void GarbageCollect(object sender, EventArgs e)
-#else
         private void GarbageCollect(object sender, RoutedEventArgs e)
-#endif
         {
             LogMessage(ObjectTracker.GarbageCollect());
         }

@@ -6,8 +6,8 @@
       xmlns:internal="clr-namespace:Esri.ArcGISRuntime.Toolkit.TestApp.Internal"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:toolkit="clr-namespace:Esri.ArcGISRuntime.Toolkit.Controls;assembly=Esri.ArcGISRuntime.Toolkit"
-      Title="TemplatePickerSample" d:DesignHeight="300"
-      d:DesignWidth="300" mc:Ignorable="d">
+      Title="TemplatePickerSample" d:DesignHeight="400"
+      d:DesignWidth="500" mc:Ignorable="d">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <StackPanel>
-                        <internal:TOCControl x:Name="MyTOCControl" Layers="{Binding Layers, ElementName=MyTemplatePicker}" />
+                        <internal:TocControl x:Name="MyTocControl" Layers="{Binding Layers, ElementName=MyTemplatePicker}" />
                         
                         <Button Margin="1" Click="InitNewLayers_OnClick"
                                 Content="Set new Layers collection"
@@ -78,7 +78,7 @@
                                     </esri:SimpleRenderer>
                                 </esri:FeatureLayer.Renderer>
                             </esri:FeatureLayer>
-                            <esri:GroupLayer DisplayName="Group Layer">
+                            <!--<esri:GroupLayer DisplayName="Group Layer">-->
 
                                 <esri:FeatureLayer DisplayName="Area">
                                     <esri:FeatureLayer.FeatureTable>
@@ -97,7 +97,7 @@
                                         </esri:SimpleRenderer>
                                     </esri:FeatureLayer.Renderer>
                                 </esri:FeatureLayer>
-                            </esri:GroupLayer>
+                            <!--</esri:GroupLayer>-->
                         </esri:Map>
                     </esri:MapView>
 

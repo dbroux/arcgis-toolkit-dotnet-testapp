@@ -3,12 +3,8 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
 #if NETFX_CORE
 using Windows.UI.Xaml;
@@ -27,12 +23,19 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
     /// </summary>
     public partial class LegendSample
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LegendSample"/> class.
+        /// </summary>
         public LegendSample()
         {
             InitializeComponent();
-#if !WINDOWS_PHONE
-            MyTOCControl.Message += (s, message) => LogMessage(message);
+#if WINDOWS_PHONE_APP
+            NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled; // cache needed when coming back from TOC
+            var navigationHelper = new NavigationHelper(this);
+#else
+            MyTocControl.Message += (s, message) => LogMessage(message);
 #endif
+            Utils.LogMapViewEvents(MyMapView, LogMessage);
             ObjectTracker.Track(this);
             ObjectTracker.Track(MyLegend);
             ObjectTracker.Track(MyMapView);
@@ -62,11 +65,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyLegend.Layers);
         }
 
-#if WINDOWS_PHONE
-        private void TestMemoryLeak(object sender, EventArgs e)
-#else
-        private void TestMemoryLeak(object sender, RoutedEventArgs e)
-#endif
+		private void TestMemoryLeak(object sender, RoutedEventArgs e)
         {
             // Create a control that should be released immediatly since no more referenced
             var control = new Controls.Legend { Layers = MyLegend.Layers };
@@ -74,12 +73,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             LogMessage(ObjectTracker.GarbageCollect());
         }
 
-
-#if WINDOWS_PHONE
-        private void GarbageCollect(object sender, EventArgs e)
-#else
         private void GarbageCollect(object sender, RoutedEventArgs e)
-#endif
         {
             LogMessage(ObjectTracker.GarbageCollect());
         }

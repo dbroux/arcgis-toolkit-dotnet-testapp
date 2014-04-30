@@ -75,7 +75,14 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
         {
             mapView.LayerLoaded += (s, e) =>
             {
-                string message = "LayerLoaded: " + GetLayerName(e.Layer) + (e.LoadError == null ? null : " Error: " + e.LoadError.Message);
+                string errorMessage = null;
+                if (e.LoadError != null)
+                {
+                    errorMessage = " Error: " + e.LoadError.Message;
+                    if (e.LoadError.InnerException != null)
+                        errorMessage += Environment.NewLine + "  -->" + e.LoadError.InnerException.Message;
+                }
+                string message = "LayerLoaded: " + GetLayerName(e.Layer) + errorMessage;
                 logMessage(message);
             };
             mapView.LayerUnloaded += (s, e) =>

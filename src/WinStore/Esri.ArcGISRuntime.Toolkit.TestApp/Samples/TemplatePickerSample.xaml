@@ -24,7 +24,7 @@
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <StackPanel>
-                        <internal:TOCControl x:Name="MyTOCControl" Layers="{Binding Layers, ElementName=MyTemplatePicker}" />
+                        <internal:TocControl x:Name="MyTocControl" Layers="{Binding Layers, ElementName=MyTemplatePicker}" />
 
                         <Button Margin="1"
                                 Click="InitNewLayers_OnClick"

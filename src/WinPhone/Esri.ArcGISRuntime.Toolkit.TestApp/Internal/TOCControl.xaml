@@ -1,29 +1,24 @@
-﻿<UserControl x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TOCControl"
+﻿<UserControl x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TocControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:XamlToolkit="using:WinRTXamlToolkit.Controls"
-             xmlns:XamlToolkitData="using:WinRTXamlToolkit.Controls.Data"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:data="using:Esri.ArcGISRuntime.Data"
-             xmlns:esri="using:Esri.ArcGISRuntime.Controls"
-             xmlns:esriToolkit="using:Esri.ArcGISRuntime.Toolkit.Controls"
-             xmlns:layers="using:Esri.ArcGISRuntime.Layers"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:symbology="using:Esri.ArcGISRuntime.Symbology"
+             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
              mc:Ignorable="d">
-    <Grid  Background="{StaticResource PhoneBackgroundBrush}">
+    <Grid>
         <StackPanel>
             <Border Margin="1">
-                <ListBox x:Name="MySelector" ItemsSource="{Binding Layers}" >
+                <ListBox x:Name="MySelector" ItemsSource="{Binding Layers}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsVisible, Mode=TwoWay}" ToolTipService.ToolTip="Toggle Layer Visibility" />
-                                <Button VerticalAlignment="Center"
+                                <CheckBox MinWidth="0" VerticalAlignment="Center" IsChecked="{Binding IsVisible, Mode=TwoWay}" />
+                                <Button MinWidth="0"
+                                        VerticalAlignment="Center"
                                         Click="RemoveLayer_OnClick"
                                         Content="X"
                                         Foreground="Red"
-                                        Padding="2"
+                                        Padding="0"
                                         ToolTipService.ToolTip="Remove Layer" />
                                 <TextBlock Margin="2" VerticalAlignment="Center" Text="{Binding DisplayName}" />
                             </StackPanel>
@@ -32,6 +27,5 @@
                 </ListBox>
             </Border>
         </StackPanel>
-
     </Grid>
 </UserControl>

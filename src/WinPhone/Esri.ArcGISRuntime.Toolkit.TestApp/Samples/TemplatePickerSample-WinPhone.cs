@@ -3,15 +3,12 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
-using System.Linq;
-using System.Windows.Controls.Primitives;
-using System.Windows.Navigation;
-using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Layers;
-using System;
-using System.Windows;
 using Esri.ArcGISRuntime.Toolkit.Controls;
 using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
+using System.Linq;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 
 namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 {
@@ -20,13 +17,24 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
     /// </summary>
     public partial class TemplatePickerSample
     {
+        /// <summary>
+        /// Invoked immediately after the Page is unloaded and is no longer the current source of a parent Frame.
+        /// </summary>
+        /// <param name="e">Event data that can be examined by overriding code. The event data is representative of the navigation that has unloaded the current Page.</param>
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            var tocPage = e.Content as TOCPage;
+            var tocPage = e.Content as TocPage;
             if (tocPage != null)
             {
                 tocPage.DataContext = MyTemplatePicker;
-                tocPage.MyTOCControl.Message += (s, message) => LogMessage(message);
+                tocPage.TocControl.Message += (s, message) => LogMessage(message);
+            }
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                // Reset cache so sample can restart from scratch
+                var cacheSize = Frame.CacheSize;
+                Frame.CacheSize = 0;
+                Frame.CacheSize = cacheSize;
             }
             base.OnNavigatedFrom(e);
         }
@@ -35,21 +43,23 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
         {
             // Initialize 
             var templatePicker = sender as TemplatePicker;
-            foreach (var flayer in templatePicker.Layers.OfType<FeatureLayer>().ToArray())
+            if (templatePicker != null)
             {
-                try
+                foreach (var flayer in templatePicker.Layers.OfType<FeatureLayer>().ToArray())
                 {
-                    await flayer.InitializeAsync();
+                    try
+                    {
+                        await flayer.InitializeAsync();
+                    }
+                    catch { }
                 }
-                catch{}
             }
             ProgressBar.Visibility = Visibility.Collapsed;
         }
 
-        private void GoToTOCPage(object sender, EventArgs e)
+        private void GoToTocPage(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Internal/TOCPage.xaml", UriKind.Relative));
+            Frame.Navigate(typeof (TocPage));
         }
-
     }
 }

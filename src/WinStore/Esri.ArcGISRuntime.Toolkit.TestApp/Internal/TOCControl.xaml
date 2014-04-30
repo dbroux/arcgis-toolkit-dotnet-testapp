@@ -1,15 +1,10 @@
-﻿<UserControl x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TOCControl"
+﻿<UserControl x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TocControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:XamlToolkit="using:WinRTXamlToolkit.Controls"
              xmlns:XamlToolkitData="using:WinRTXamlToolkit.Controls.Data"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:data="using:Esri.ArcGISRuntime.Data"
-             xmlns:esri="using:Esri.ArcGISRuntime.Controls"
-             xmlns:esriToolkit="using:Esri.ArcGISRuntime.Toolkit.Controls"
-             xmlns:layers="using:Esri.ArcGISRuntime.Layers"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:symbology="using:Esri.ArcGISRuntime.Symbology"
              mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>

@@ -1,36 +1,26 @@
-﻿<phone:PhoneApplicationPage x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TOCPage"
-                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                            xmlns:internal="clr-namespace:Esri.ArcGISRuntime.Toolkit.TestApp.Internal"
-                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                            FontSize="{StaticResource PhoneFontSizeNormal}"
-                            Foreground="{StaticResource PhoneForegroundBrush}"
-                            Orientation="Portrait"
-                            SupportedOrientations="Portrait"
-                            shell:SystemTray.IsVisible="True"
-                            mc:Ignorable="d">
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsMenuEnabled="True"
-                              IsVisible="True"
-                              Mode="Default"
-                              Opacity="1">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Click="AddStreetMapLayer_OnClick" Text="Add StreetMapLayer" />
-                <shell:ApplicationBarMenuItem Click="AddLayer_OnClick" Text="Add Feature Layer" />
+﻿<Page
+    x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Internal.TocPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Esri.ArcGISRuntime.Toolkit.TestApp.Internal"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="Add StreetMapLayer" Click="AddStreetMapLayer_OnClick"></AppBarButton>
+                <AppBarButton Label="Add Feature Layer" Click="AddLayer_OnClick"></AppBarButton>
                 <!--<shell:ApplicationBarMenuItem Click="AddGroupLayer_OnClick" Text="Add Group Layer" />
                 <shell:ApplicationBarMenuItem Click="AddGroupLayerWithFL_OnClick" Text="Add Group Layer + FL" />-->
-                <shell:ApplicationBarMenuItem Click="SwitchLayers_OnClick" Text="Switch Layers 1 and 2" />
-                <shell:ApplicationBarMenuItem Click="ClearLayers_OnClick" Text="Remove all Layers" />
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
+                <AppBarButton Label="Switch Layers 1 and 2" Click="SwitchLayers_OnClick"></AppBarButton>
+                <AppBarButton Label="Remove all Layers" Click="ClearLayers_OnClick"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 
-    <!--  LayoutRoot is the root grid where all page content is placed  -->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -38,20 +28,16 @@
 
         <!--  TitlePanel contains the name of the application and page title  -->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle2Style}" Text="Table Of Contents" />
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="Table Of Contents" />
         </StackPanel>
 
         <!--  ContentPanel - place additional content here  -->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Border Width="480"
-                    Height="800"
-                    Margin="1"
-                    Background="{StaticResource PhoneBackgroundBrush}">
+        <Grid Grid.Row="1" Margin="12,0,12,0">
+            <Border Margin="1">
                 <ScrollViewer>
-                    <internal:TOCControl x:Name="MyTOCControl" Layers="{Binding DataContext.Layers, ElementName=LayoutRoot}" />
+                    <local:TocControl x:Name="MyTocControl" Layers="{Binding DataContext.Layers, ElementName=LayoutRoot}" />
                 </ScrollViewer>
             </Border>
         </Grid>
     </Grid>
-
-</phone:PhoneApplicationPage>
+</Page>

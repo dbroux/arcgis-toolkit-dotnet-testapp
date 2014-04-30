@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:converters="using:Esri.ArcGISRuntime.Toolkit.TestApp.Converters"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:data="using:Esri.ArcGISRuntime.Data"
       xmlns:esri="using:Esri.ArcGISRuntime.Controls"
       xmlns:esriToolkit="using:Esri.ArcGISRuntime.Toolkit.Controls"
       xmlns:layers="using:Esri.ArcGISRuntime.Layers"
@@ -21,22 +20,32 @@
                     <Setter Property="FontFamily" Value="Segoe UI Light" />
                     <Setter Property="FontSize" Value="12" />
                     <Setter Property="MaxWidth" Value="400" />
-                    <Setter Property="Background" Value="#99FFFFFF" />
+                    <Setter Property="Background" Value="#69FFFFFF" />
+                    <Setter Property="Foreground" Value="Black" />
                     <Setter Property="IsHitTestVisible" Value="true" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="esriToolkit:Attribution">
-                                <ToggleButton Background="{TemplateBinding Background}" Content="{Binding Items, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <ToggleButton Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Content="{Binding Items, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <ToggleButton.Template>
                                         <ControlTemplate>
-                                            <Grid Background="{TemplateBinding Background}">
+                                            <Grid x:Name="grid" Background="{TemplateBinding Background}">
                                                 <Grid.Resources>
                                                     <converters:StringJoinConverter x:Key="joinConverter" />
                                                 </Grid.Resources>
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
-                                                        <VisualState x:Name="PointerOver" />
+                                                        <VisualState x:Name="PointerOver" >
+                                                            <Storyboard>
+                                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
+                                                                    <LinearColorKeyFrame KeyTime="0:0:0.5" Value="White"/>
+                                                                </ColorAnimationUsingKeyFrames>
+                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="tb" Storyboard.TargetProperty="Opacity">
+                                                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="1.0"/>
+                                                                </DoubleAnimationUsingKeyFrames>
+                                                            </Storyboard>
+                                                        </VisualState>
                                                         <VisualState x:Name="CheckedPointerOver">
                                                             <Storyboard>
                                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="tb" Storyboard.TargetProperty="TextWrapping">
@@ -46,6 +55,12 @@
                                                                         </DiscreteObjectKeyFrame.Value>
                                                                     </DiscreteObjectKeyFrame>
                                                                 </ObjectAnimationUsingKeyFrames>
+                                                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(Grid.Background).(SolidColorBrush.Color)">
+                                                                    <LinearColorKeyFrame KeyTime="0:0:0.5" Value="White"/>
+                                                                </ColorAnimationUsingKeyFrames>
+                                                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="tb" Storyboard.TargetProperty="Opacity">
+                                                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.5" Value="1.0"/>
+                                                                </DoubleAnimationUsingKeyFrames>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Checked">
@@ -61,8 +76,8 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-                                                <TextBlock x:Name="tb"
-                                                           Margin="10"
+                                                <TextBlock x:Name="tb" Foreground="{TemplateBinding Foreground}"
+                                                           Margin="10" Opacity="0.7"
                                                            Text="{Binding Content, Converter={StaticResource joinConverter}, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}, ConverterParameter='  '}"
                                                            TextTrimming="CharacterEllipsis"
                                                            TextWrapping="NoWrap" />
@@ -95,7 +110,7 @@
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <Border BorderBrush="Gray" BorderThickness="1">
                     <StackPanel>
-                        <internal:TOCControl x:Name="MyTOCControl" Layers="{Binding Layers, ElementName=MyAttribution}" />
+                        <internal:TocControl x:Name="MyTocControl" Layers="{Binding Layers, ElementName=MyAttribution}" />
 
                         <Button Margin="1"
                                 Click="InitNewLayers_OnClick"
@@ -116,17 +131,17 @@
                 </Border>
             </ScrollViewer>
             
-            <Grid x:Name="Container" Grid.Column="1">
+            <Grid Grid.Column="1">
                 <esri:MapView x:Name="MyMapView">
                     <esri:Map x:Name="MyMap">
-                        <layers:BingLayer DisplayName="Bing Layer"  Key="Ah-EjchLFDU5daFCgR_Uf29TWVEa4rrtx02rTTi59cbLIH6dRDPhGnRbcCxTaykZ" MapStyle="Aerial" />
-                        <layers:ArcGISTiledMapServiceLayer DisplayName="Street Map" ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" Opacity="0.5" IsVisible="False" />
+                        <layers:BingLayer DisplayName="Bing Layer"  Key="Ah-EjchLFDU5daFCgR_Uf29TWVEa4rrtx02rTTi59cbLIH6dRDPhGnRbcCxTaykZ" MapStyle="Aerial" IsVisible="False"/>
+                        <layers:ArcGISTiledMapServiceLayer DisplayName="Street Map" ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" IsVisible="True" />
                         <layers:ArcGISTiledMapServiceLayer DisplayName="Topo Map SSL" ServiceUri="https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer" Opacity="0.5" IsVisible="False" />
                         <layers:ArcGISTiledMapServiceLayer DisplayName="Ocean (no community attribution)" ServiceUri="http://services.arcgisonline.com/arcgis/rest/services/Ocean_Basemap/MapServer" Opacity="0.5" IsVisible="False" />
                         <layers:ArcGISTiledMapServiceLayer DisplayName="Imagery as DynamicLayer" ServiceUri="http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer" Opacity="0.5" IsVisible="False" />
                         <layers:WebTiledLayer CopyrightText="Map Quest"
                             DisplayName="Map Quest"
-                            Opacity="0.5"
+                            Opacity="0.5" IsVisible="False"
                             TemplateUri="http://mtile01.mqcdn.com/tiles/1.0.0/vx/map/{level}/{col}/{row}.jpg" />
                     </esri:Map>
                 </esri:MapView>
@@ -147,7 +162,7 @@
                         BorderThickness="1"
                         CornerRadius="3"
                         Padding="5">
-                    <Grid>
+                    <Grid RequestedTheme="Light">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
