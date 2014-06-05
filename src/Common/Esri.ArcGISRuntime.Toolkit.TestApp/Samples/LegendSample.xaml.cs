@@ -67,7 +67,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 
 		private void TestMemoryLeak(object sender, RoutedEventArgs e)
         {
-            // Create a control that should be released immediatly since no more referenced
+            // Create a control that should be released immediately since no more referenced
             var control = new Controls.Legend { Layers = MyLegend.Layers };
             ObjectTracker.Track(control);
             LogMessage(ObjectTracker.GarbageCollect());
@@ -77,5 +77,25 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
         {
             LogMessage(ObjectTracker.GarbageCollect());
         }
+
+		private void MyMapView_OnLayerLoaded(object sender, ArcGISRuntime.Controls.LayerLoadedEventArgs e)
+		{
+			// Zoom to water network
+			var layer = e.Layer as ArcGISDynamicMapServiceLayer;
+			if (layer != null)
+			{
+				Envelope extent = layer.ServiceInfo.InitialExtent ?? layer.ServiceInfo.InitialExtent;
+				if (extent != null)
+				{
+					if (!SpatialReference.AreEqual(extent.SpatialReference, MyMapView.SpatialReference))
+						extent = GeometryEngine.Project(extent, MyMapView.SpatialReference) as Envelope;
+					if (extent != null)
+					{
+						extent = extent.Expand(0.5);
+						MyMapView.SetView(extent);
+					}
+				}
+			}
+		}
     }
 }

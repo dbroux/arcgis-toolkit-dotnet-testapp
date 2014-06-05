@@ -143,7 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="WinRTXamlToolkit">
-      <HintPath>..\..\packages\WinRTXamlToolkit.1.6.1.3\lib\netcore451\WinRTXamlToolkit.dll</HintPath>
+      <HintPath>..\..\..\..\..\packages\WinRTXamlToolkit.1.6.1.3\lib\netcore451\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup />
