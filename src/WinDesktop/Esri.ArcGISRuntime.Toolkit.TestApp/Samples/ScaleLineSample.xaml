@@ -6,6 +6,7 @@
       xmlns:esriToolkit="clr-namespace:Esri.ArcGISRuntime.Toolkit.Controls;assembly=Esri.ArcGISRuntime.Toolkit"
       xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
       xmlns:converters="clr-namespace:Esri.ArcGISRuntime.Toolkit.TestApp.Converters"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="500"
 	Title="ScaleLineSample">
@@ -638,12 +639,14 @@
                                     <Grid.Resources>
                                         <!--  Units Converter for resources localization  -->
                                         <converters:ObjectToObjectConverter x:Key="UnitsConverter">
-                                            <ResourceDictionary>
-                                                <!--<x:String x:Key="m">Métres</x:String>
-                                                <x:String x:Key="km">Kilométres</x:String>
-                                                <x:String x:Key="ft">Pieds</x:String>
-                                                <x:String x:Key="mi">Miles</x:String>-->
-                                            </ResourceDictionary>
+                                            <!--<converters:ObjectToObjectConverter.ResourceDictionary>-->
+                                                <ResourceDictionary>
+                                                    <system:String x:Key="m">Métres</system:String>
+                                                    <system:String x:Key="km">Kilométres</system:String>
+                                                    <system:String x:Key="ft">Pieds</system:String>
+                                                    <system:String x:Key="mi">Miles</system:String>
+                                                </ResourceDictionary>
+                                            <!--</converters:ObjectToObjectConverter.ResourceDictionary>-->
                                         </converters:ObjectToObjectConverter>
                                     </Grid.Resources>
                                     <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
