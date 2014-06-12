@@ -47,7 +47,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate d:DesignData="{d:DesignInstance local:SymbolViewModel}">
                     <StackPanel Margin="5">
-                        <TextBlock Text="{Binding Title}" TextDecorations="Underline" />
+                        <TextBlock Text="{Binding Title}" TextDecorations="Underline" HorizontalAlignment="Center" />
                         <esri:SymbolDisplay Symbol="{Binding Symbol}" MinHeight="50" MinWidth="50" />
                     </StackPanel>
                 </DataTemplate>

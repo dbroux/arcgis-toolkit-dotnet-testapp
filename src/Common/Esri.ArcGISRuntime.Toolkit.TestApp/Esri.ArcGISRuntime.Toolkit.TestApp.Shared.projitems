@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Samples\AttributionSample.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Samples\LegendSample.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Samples\ScaleLineSample.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Samples\SymbolDisplayTest.xaml.cs"/>
     <Compile Include="$(MSBuildThisFileDirectory)Samples\TemplatePickerSample.xaml.cs" />
   </ItemGroup>
 </Project>

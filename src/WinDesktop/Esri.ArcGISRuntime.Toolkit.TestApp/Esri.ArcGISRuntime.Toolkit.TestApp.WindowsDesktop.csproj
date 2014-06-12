@@ -62,9 +62,6 @@
     <Compile Include="Samples\PortalSymbolsSample.xaml.cs">
       <DependentUpon>PortalSymbolsSample.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Samples\SymbolDisplayTest.xaml.cs">
-      <DependentUpon>SymbolDisplayTest.xaml</DependentUpon>
-    </Compile>
     <Compile Include="StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>

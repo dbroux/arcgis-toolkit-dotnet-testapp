@@ -62,11 +62,11 @@
                 <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="SymbolDisplay Width:" />
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Width, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="SymbolDisplay MinHeight:" />
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MinHeight, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="SymbolDisplay DefaultHeight:" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DefaultHeight, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="5" VerticalAlignment="Center" Text="SymbolDisplay MinWidth:" />
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding MinWidth, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="5" VerticalAlignment="Center" Text="SymbolDisplay DefaultWidth:" />
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding DefaultWidth, ElementName=symbolDisplay, Mode=TwoWay}" />
 
                 <TextBlock Grid.Row="6" VerticalAlignment="Center" Text="BackgroundColor:" />
                 <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BackgroundColor, ElementName=symbolDisplay, Mode=TwoWay}" />
