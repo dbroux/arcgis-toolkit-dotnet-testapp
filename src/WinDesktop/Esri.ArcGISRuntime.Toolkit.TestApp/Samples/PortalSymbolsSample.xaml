@@ -2,9 +2,9 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
       xmlns:local="clr-namespace:Esri.ArcGISRuntime.Toolkit.TestApp.Samples"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:primitives="clr-namespace:Esri.ArcGISRuntime.Toolkit.Controls.Primitives;assembly=Esri.ArcGISRuntime.Toolkit"
       Title="SymbolDisplaySample"
       d:DesignHeight="300"
       d:DesignWidth="300"
@@ -48,7 +48,7 @@
                 <DataTemplate d:DesignData="{d:DesignInstance local:SymbolViewModel}">
                     <StackPanel Margin="5">
                         <TextBlock Text="{Binding Title}" TextDecorations="Underline" HorizontalAlignment="Center" />
-                        <esri:SymbolDisplay Symbol="{Binding Symbol}" MinHeight="50" MinWidth="50" />
+                        <primitives:SymbolDisplay Symbol="{Binding Symbol}" MinHeight="50" MinWidth="50" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

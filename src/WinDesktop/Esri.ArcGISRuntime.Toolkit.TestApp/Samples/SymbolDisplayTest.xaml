@@ -2,8 +2,8 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:primitives="clr-namespace:Esri.ArcGISRuntime.Toolkit.Controls.Primitives;assembly=Esri.ArcGISRuntime.Toolkit"
       Title="SymbolDisplay Sample"
       d:DesignHeight="300"
       d:DesignWidth="300"
@@ -41,7 +41,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Symbol to test:" />
                 <ComboBox x:Name="ComboBox"
@@ -53,25 +52,22 @@
                           ItemsSource="{Binding SymbolInfos}"
                           SelectedIndex="0" />
 
-                <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Swatch dpi (0=current view dpi):" />
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SwatchDpi, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="SymbolDisplay Height:" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Height, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="SymbolDisplay Height:" />
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Height, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="SymbolDisplay Width:" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Width, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="SymbolDisplay Width:" />
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Width, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="SymbolDisplay MaxHeight:" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MaxHeight, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="SymbolDisplay DefaultHeight:" />
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DefaultHeight, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="4" VerticalAlignment="Center" Text="SymbolDisplay MaxWidth:" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MaxWidth, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="5" VerticalAlignment="Center" Text="SymbolDisplay DefaultWidth:" />
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding DefaultWidth, ElementName=symbolDisplay, Mode=TwoWay}" />
+                <TextBlock Grid.Row="5" VerticalAlignment="Center" Text="BackgroundColor:" />
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding BackgroundColor, ElementName=symbolDisplay, Mode=TwoWay}" />
 
-                <TextBlock Grid.Row="6" VerticalAlignment="Center" Text="BackgroundColor:" />
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BackgroundColor, ElementName=symbolDisplay, Mode=TwoWay}" />
-
-                <TextBlock Grid.Row="7"
+                <TextBlock Grid.Row="6"
                            Grid.ColumnSpan="2"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -82,8 +78,8 @@
 
         <Grid Grid.Row="1">
             <Grid Background="{StaticResource GridOverlayBrush}" />
-            <esri:SymbolDisplay x:Name="symbolDisplay"
-                                BackgroundColor="#60FFFFFF"
+            <primitives:SymbolDisplay x:Name="symbolDisplay"
+                                BackgroundColor="#60FFFFFF" 
                                 BorderBrush="Black"
                                 BorderThickness="1"
                                 GeometryType="{Binding SelectedItem.GeometryType, ElementName=ComboBox}"

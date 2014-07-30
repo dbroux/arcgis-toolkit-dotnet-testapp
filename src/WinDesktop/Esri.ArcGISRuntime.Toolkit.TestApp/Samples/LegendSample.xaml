@@ -220,7 +220,7 @@
                 </StackPanel>
             </Border>
             <Grid x:Name="Container" Grid.Column="1">
-                <esri:MapView x:Name="MyMapView" LayerLoaded="MyMapView_OnLayerLoaded">
+                <esri:MapView x:Name="MyMapView" LayerLoaded="ZoomToDynamicLayerOnLayerLoaded">
                     <esri:Map x:Name="MyMap">
                         <esri:ArcGISTiledMapServiceLayer DisplayName="Street Map" ServiceUri="http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer" ShowLegend="False" />
                         <esri:ArcGISDynamicMapServiceLayer DisplayName="Water Network" ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Water_Network/MapServer" />

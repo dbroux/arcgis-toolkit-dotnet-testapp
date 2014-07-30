@@ -36,7 +36,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyTemplatePicker);
             ObjectTracker.Track(MyMapView);
             Utils.TrackMap(MyMap);
-            MyMap.InitialExtent = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
+			MyMap.InitialViewpoint = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
         }
 
         private void TemplatePicker_OnTemplatePicked(object sender, Controls.TemplatePicker.TemplatePickedEventArgs e)
@@ -62,7 +62,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 
         private void TestMemoryLeak(object sender, RoutedEventArgs e)
         {
-            // Create a template picker that should be released immediatly since no more referenced
+            // Create a template picker that should be released immediately since no more referenced
             var templatePicker = new Controls.TemplatePicker {Layers = MyTemplatePicker.Layers};
             ObjectTracker.Track(templatePicker);
             LogMessage(ObjectTracker.GarbageCollect());

@@ -40,7 +40,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyLegend);
             ObjectTracker.Track(MyMapView);
             Utils.TrackMap(MyMap);
-            MyMap.InitialExtent = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
+			MyMap.InitialViewpoint = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
         }
 
         private void OnLegendRefreshed(object sender, Controls.Legend.RefreshedEventArgs e)
@@ -78,7 +78,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             LogMessage(ObjectTracker.GarbageCollect());
         }
 
-		private void MyMapView_OnLayerLoaded(object sender, ArcGISRuntime.Controls.LayerLoadedEventArgs e)
+		private void ZoomToDynamicLayerOnLayerLoaded(object sender, ArcGISRuntime.Controls.LayerLoadedEventArgs e)
 		{
 			// Zoom to water network
 			var layer = e.Layer as ArcGISDynamicMapServiceLayer;

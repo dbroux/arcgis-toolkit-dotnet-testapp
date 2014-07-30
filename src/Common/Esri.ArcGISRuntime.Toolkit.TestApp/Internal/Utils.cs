@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Layers;
@@ -95,6 +97,11 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
                 const string message = "SpatialReference Changed" ;
                 logMessage(message);
             };
+            Task task = mapView.LayersLoadedAsync().ContinueWith(t =>
+            {
+                string message = string.Format("All layers are loaded with {0} error(s)", t.Result.Count(l => l.LoadError != null));
+                logMessage(message);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public static void TrackMap(Map map)

@@ -2,10 +2,14 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:esriToolkit="using:Esri.ArcGISRuntime.Toolkit.Controls"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:primitives="using:Esri.ArcGISRuntime.Toolkit.Controls.Primitives"
+      xmlns:samples="using:Esri.ArcGISRuntime.Toolkit.TestApp.Samples"
       mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <samples:NumericToStringConverter x:Key="NumericToStringConverter" />
+        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -26,7 +30,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Symbol to test:" />
                 <ComboBox x:Name="SymbolComboBox"
@@ -37,50 +40,42 @@
                           DisplayMemberPath="Description" Loaded="SymbolComboBoxOnLoaded"
                           ItemsSource="{Binding SymbolInfos}" />
 
-
                 <TextBlock Grid.Row="1"
                            Grid.Column="0"
                            Margin="1"
                            VerticalAlignment="Center"
-                           Text="Swatch dpi (0=current view dpi):" />
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SwatchDpi, ElementName=symbolDisplay, Mode=TwoWay}" />
+                           Text="SymbolDisplay Height:" />
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Height, ElementName=symbolDisplay, Mode=TwoWay, Converter={StaticResource NumericToStringConverter}}" />
 
                 <TextBlock Grid.Row="2"
                            Grid.Column="0"
                            Margin="1"
                            VerticalAlignment="Center"
-                           Text="SymbolDisplay Height:" />
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Height, ElementName=symbolDisplay, Mode=TwoWay}" />
+                           Text="SymbolDisplay Width:" />
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Width, ElementName=symbolDisplay, Mode=TwoWay, Converter={StaticResource NumericToStringConverter}}" />
 
                 <TextBlock Grid.Row="3"
                            Grid.Column="0"
                            Margin="1"
                            VerticalAlignment="Center"
-                           Text="SymbolDisplay Width:" />
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Width, ElementName=symbolDisplay, Mode=TwoWay}" />
+                           Text="SymbolDisplay MaxHeight:" />
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MaxHeight, ElementName=symbolDisplay, Mode=TwoWay, Converter={StaticResource NumericToStringConverter}}" />
 
                 <TextBlock Grid.Row="4"
                            Grid.Column="0"
                            Margin="1"
                            VerticalAlignment="Center"
-                           Text="SymbolDisplay DefaultHeight:" />
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DefaultHeight, ElementName=symbolDisplay, Mode=TwoWay}" />
+                           Text="SymbolDisplay MaxWidth:" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding MaxWidth, ElementName=symbolDisplay, Mode=TwoWay, Converter={StaticResource NumericToStringConverter}}" />
 
-                <TextBlock Grid.Row="5"
-                           Grid.Column="0"
-                           Margin="1"
-                           VerticalAlignment="Center"
-                           Text="SymbolDisplay DefaultWidth:" />
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding DefaultWidth, ElementName=symbolDisplay, Mode=TwoWay}" />
-
-                <!--<TextBlock Grid.Row="6"
+                <!--<TextBlock Grid.Row="5"
                            Grid.Column="0"
                            Margin="1"
                            VerticalAlignment="Center"
                            Text="BackgroundColor:" />
                 <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding BackgroundColor, ElementName=symbolDisplay, Mode=TwoWay}" />-->
 
-                <TextBlock Grid.Row="7"
+                <TextBlock Grid.Row="6"
                            Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Margin="1"
@@ -93,7 +88,7 @@
 
         <Grid Grid.Row="1" Background="White" Margin="2">
             <Border Width="50" Height="50" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <esriToolkit:SymbolDisplay x:Name="symbolDisplay"
+            <primitives:SymbolDisplay x:Name="symbolDisplay"
                                        BackgroundColor="#60FFFFFF"
                                        BorderBrush="Black"
                                        BorderThickness="1"

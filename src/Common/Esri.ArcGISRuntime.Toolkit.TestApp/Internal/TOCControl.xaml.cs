@@ -95,7 +95,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
             var ft = new GeodatabaseFeatureServiceTable(new Uri(url)) { UseAdvancedSymbology = true };
             var featureLayer = new FeatureLayer(ft);
             await featureLayer.InitializeAsync();
-            featureLayer.DisplayName = featureLayer.FeatureTable.ServiceInfo.Name;
+            featureLayer.DisplayName = ((GeodatabaseFeatureServiceTable)featureLayer.FeatureTable).ServiceInfo.Name;
             LogMessage("Added Layer " + Utils.GetLayerName(featureLayer));
             //featureLayer.MinScale = MyMapView.Scale * 4;
             //featureLayer.MaxScale = MyMapView.Scale / 4;

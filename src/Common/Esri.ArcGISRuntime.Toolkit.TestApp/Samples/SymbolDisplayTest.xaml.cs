@@ -6,6 +6,7 @@ using Symbol = Esri.ArcGISRuntime.Symbology.Symbol;
 #if NETFX_CORE
 using Windows.UI.Xaml.Controls;
 using Windows.UI;
+using Windows.UI.Xaml.Data;
 #else
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -118,7 +119,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
                 },
                 new SymbolInfo
                 {
-                    Description = "PMS Without Size (not working for now)",
+                    Description = "PMS Without Size",
                     Symbol = pictureMarkerSymbolWithoutSize,
                     GeometryType = GeometryType.Unknown
                 },
@@ -198,6 +199,45 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
         /// </summary>
         public GeometryType GeometryType { get; set; }
     }
+
+#if NETFX_CORE
+    public class NumericToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            string val;
+            if (value is double && double.IsInfinity((double)value))
+            {
+                val = "Infinity";
+            }
+            else if (value is double && double.IsNaN((double)value))
+            {
+                val = "NaN";
+            }
+            else
+                val = value.ToString();
+            return val;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            double val;
+            if (value is string && string.Equals((string)value, "infinity", StringComparison.OrdinalIgnoreCase))
+            {
+                val = double.PositiveInfinity;
+            }
+            else if (value is string && string.Equals((string)value, "nan", StringComparison.OrdinalIgnoreCase))
+            {
+                val = double.NaN;
+            }
+            else
+            {
+                val = System.Convert.ToDouble(value);
+            }
+            return val;
+        }
+    }
+#endif
 }
 
 

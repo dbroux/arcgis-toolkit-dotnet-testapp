@@ -128,10 +128,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Esri.ArcGISRuntime, Version=10.2.3">
-      <Name>ArcGIS Runtime for Windows Store apps %28Beta 2%29</Name>
+    <SDKReference Include="Esri.ArcGISRuntime, Version=10.2.4">
+      <Name>ArcGIS Runtime for Windows Store apps</Name>
     </SDKReference>
-    <SDKReference Include="Esri.ArcGISRuntime.Toolkit, Version=10.2.3">
+    <SDKReference Include="Esri.ArcGISRuntime.Toolkit, Version=10.2.4">
       <Name>Toolkit for ArcGIS Runtime %28Windows Store%29</Name>
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=12.0">

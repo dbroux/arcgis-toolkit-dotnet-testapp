@@ -8,7 +8,6 @@
       xmlns:internal="using:Esri.ArcGISRuntime.Toolkit.TestApp.Internal"
       xmlns:layers="using:Esri.ArcGISRuntime.Layers"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:symbology="using:Esri.ArcGISRuntime.Symbology"
       mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -65,7 +64,7 @@
                                     <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/6" UseAdvancedSymbology="False" />
                                 </layers:FeatureLayer.FeatureTable>
                             </layers:FeatureLayer>
-                            <layers:FeatureLayer DisplayName="River">
+                            <!--<layers:FeatureLayer DisplayName="River">
                                 <layers:FeatureLayer.FeatureTable>
                                     <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
                                 </layers:FeatureLayer.FeatureTable>
@@ -81,9 +80,9 @@
                                         </symbology:SimpleRenderer.Symbol>
                                     </symbology:SimpleRenderer>
                                 </layers:FeatureLayer.Renderer>
-                            </layers:FeatureLayer>
-                            <layers:GroupLayer DisplayName="Group Layer">
-                                <layers:FeatureLayer DisplayName="Area">
+                            </layers:FeatureLayer>-->
+                            <!--<layers:GroupLayer DisplayName="Group Layer">-->
+                                <!--<layers:FeatureLayer DisplayName="Area">
                                     <layers:FeatureLayer.FeatureTable>
                                         <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
                                     </layers:FeatureLayer.FeatureTable>
@@ -99,8 +98,8 @@
                                             </symbology:SimpleRenderer.Symbol>
                                         </symbology:SimpleRenderer>
                                     </layers:FeatureLayer.Renderer>
-                                </layers:FeatureLayer>
-                            </layers:GroupLayer>
+                                </layers:FeatureLayer>-->
+                            <!--</layers:GroupLayer>-->
                         </esri:Map>
                     </esri:MapView>
                 </Grid>
