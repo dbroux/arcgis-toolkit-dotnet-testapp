@@ -1,0 +1,40 @@
+﻿<Page x:Class="Esri.ArcGISRuntime.Toolkit.TestApp.Samples.SignInDialogSample"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Esri.ArcGISRuntime.Toolkit.TestApp.Samples"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:Esri.ArcGISRuntime.Toolkit.Controls"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="controls:SignInDialog">
+            <Setter Property="Title" Value="My Title"></Setter>
+            <!--<Setter Property="UserName" Value="Dominique"></Setter>-->
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  TitlePanel contains the name of the application and page title  -->
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="SignInDialog Sample" />
+            </StackPanel>
+
+            <!--  ContentPanel - place additional content here  -->
+            <Grid Grid.Row="1" Margin="12,0,12,0">
+                <StackPanel>
+                    <Button Click="PortalSignInOnClick" Content="Portal Sign In" />
+                    <Button Click="IWAPortalSignInOnClick" Content="IWA Portal Sign In" />
+                    <Button Click="AccessSecuredServiceOnClick" Content="Access Secured Servce" />
+                    <Button Click="SignOutOnClick" Content="Sign Out" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

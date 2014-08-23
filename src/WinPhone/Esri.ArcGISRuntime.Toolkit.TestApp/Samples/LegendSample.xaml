@@ -232,17 +232,17 @@
                           <layers:ArcGISDynamicMapServiceLayer DisplayName="Water Network" ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Water_Network/MapServer" />  
                         <layers:FeatureLayer DisplayName="Military Hostile Units">
                             <layers:FeatureLayer.FeatureTable>
-                                <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/6" UseAdvancedSymbology="True" />
+                                <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/6" UseAdvancedSymbology="True" />
                             </layers:FeatureLayer.FeatureTable>
                         </layers:FeatureLayer>
                         <layers:FeatureLayer DisplayName="River">
                             <layers:FeatureLayer.FeatureTable>
-                                <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
+                                <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
                             </layers:FeatureLayer.FeatureTable>
                         </layers:FeatureLayer>
                         <layers:FeatureLayer DisplayName="River2">
                             <layers:FeatureLayer.FeatureTable>
-                                <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
+                                <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
                             </layers:FeatureLayer.FeatureTable>
                             <layers:FeatureLayer.Renderer>
                                 <symbology:SimpleRenderer>
@@ -254,12 +254,12 @@
                         </layers:FeatureLayer>
                         <layers:FeatureLayer DisplayName="Area">
                             <layers:FeatureLayer.FeatureTable>
-                                <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
+                                <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
                             </layers:FeatureLayer.FeatureTable>
                         </layers:FeatureLayer>
                         <layers:FeatureLayer DisplayName="Area2">
                             <layers:FeatureLayer.FeatureTable>
-                                <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
+                                <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
                             </layers:FeatureLayer.FeatureTable>
                             <layers:FeatureLayer.Renderer>
                                 <symbology:SimpleRenderer>
@@ -303,10 +303,10 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <TextBlock VerticalAlignment="Center" Text="Legend Style:" />
-                        <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Show Only Visible Layers:" />
-                        <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Reverse Layers Order:" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="Show Only Visible Layers:" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Reverse Layers Order:" />
                         <ComboBox x:Name="StyleComboBox"
-                                  Grid.Column="1"
+                                  Grid.Row="0" Grid.Column="1"
                                   DisplayMemberPath="Key"
                                   ItemsSource="{Binding Source={StaticResource Styles}, Converter={StaticResource resourceDictionaryConverter}}"
                                   SelectedIndex="0"

@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using System.Collections.ObjectModel;
@@ -31,7 +32,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyAttribution);
             ObjectTracker.Track(MyMapView);
             Utils.TrackMap(MyMap);
-            MyMap.InitialExtent = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
+            MyMap.InitialViewpoint = new ViewpointExtent(new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator));
 
 #if WINDOWS_PHONE_APP
             NavigationCacheMode = Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled; // cache needed when coming back from TOC

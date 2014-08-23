@@ -28,8 +28,8 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
                 if (featureLayer != null)
                 {
                     name = featureLayer.FeatureTable.Name;
-                    if (string.IsNullOrEmpty(name) && featureLayer.FeatureTable is GeodatabaseFeatureServiceTable) // not initialized yet
-                        name = ((GeodatabaseFeatureServiceTable)featureLayer.FeatureTable).ServiceUri;
+                    if (string.IsNullOrEmpty(name) && featureLayer.FeatureTable is ServiceFeatureTable) // not initialized yet
+						name = ((ServiceFeatureTable)featureLayer.FeatureTable).ServiceUri;
                 }
                 if (string.IsNullOrEmpty(name))
                     name = layer.GetType().Name; // fallback value

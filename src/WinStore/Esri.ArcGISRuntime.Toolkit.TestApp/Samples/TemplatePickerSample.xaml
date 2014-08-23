@@ -62,17 +62,17 @@
                         <esri:Map x:Name="MyMap">
                             <layers:FeatureLayer DisplayName="Military Hostile Units">
                                 <layers:FeatureLayer.FeatureTable>
-                                    <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/6" UseAdvancedSymbology="False" />
+                                    <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/6" UseAdvancedSymbology="False" />
                                 </layers:FeatureLayer.FeatureTable>
                             </layers:FeatureLayer>
                             <layers:FeatureLayer DisplayName="River">
                                 <layers:FeatureLayer.FeatureTable>
-                                    <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
+                                    <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
                                 </layers:FeatureLayer.FeatureTable>
                             </layers:FeatureLayer>
                             <layers:FeatureLayer DisplayName="River2">
                                 <layers:FeatureLayer.FeatureTable>
-                                    <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
+                                    <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/8" UseAdvancedSymbology="False" />
                                 </layers:FeatureLayer.FeatureTable>
                                 <layers:FeatureLayer.Renderer>
                                     <symbology:SimpleRenderer>
@@ -85,12 +85,12 @@
                             <layers:GroupLayer DisplayName="Group Layer">
                                 <layers:FeatureLayer DisplayName="Area">
                                     <layers:FeatureLayer.FeatureTable>
-                                        <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
+                                        <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
                                     </layers:FeatureLayer.FeatureTable>
                                 </layers:FeatureLayer>
                                 <layers:FeatureLayer DisplayName="Area2">
                                     <layers:FeatureLayer.FeatureTable>
-                                        <data:GeodatabaseFeatureServiceTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
+                                        <data:ServiceFeatureTable ServiceUri="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/9" UseAdvancedSymbology="False" />
                                     </layers:FeatureLayer.FeatureTable>
                                     <layers:FeatureLayer.Renderer>
                                         <symbology:SimpleRenderer>
