@@ -2,38 +2,85 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:Esri.ArcGISRuntime.Toolkit.TestApp.Samples"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:controls="using:Esri.ArcGISRuntime.Toolkit.Controls"
+      x:Name="Page"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      FontSize="16"
+      d:DataContext="{Binding ElementName=Page}"
       mc:Ignorable="d">
-    <Page.Resources>
-        <Style TargetType="controls:SignInDialog">
-            <Setter Property="Title" Value="My Title"></Setter>
-            <!--<Setter Property="UserName" Value="Dominique"></Setter>-->
-        </Style>
-    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <!--  TitlePanel contains the name of the application and page title  -->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="SignInDialog Sample" />
+        </StackPanel>
 
-            <!--  TitlePanel contains the name of the application and page title  -->
-            <StackPanel Grid.Row="0" Margin="12,17,0,28">
-                <TextBlock HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" Text="SignInDialog Sample" />
-            </StackPanel>
+        <!--  ContentPanel - place additional content here  -->
+        <Grid Grid.Row="1" Margin="12,0,12,0">
+            <Grid Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Margin="5" VerticalAlignment="Center" Text="Select the portal : " />
+                <ComboBox Loaded="ComboBox_OnLoaded"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          SelectedValue="{Binding PortalUrl, Mode=TwoWay}">
+                    <ComboBox.Items>
+                        <x:String>http://arcgistest.maps.arcgis.com/sharing/rest</x:String>
+                        <x:String>http://www.arcgis.com/sharing/rest</x:String>
+                        <x:String>https://portalfed.esri.com/gis/sharing</x:String>
+                        <x:String>https://portaliwa.esri.com/gis/sharing/rest</x:String>
+                        <x:String>https://serverlinux.esri.com/arcgis/sharing/rest</x:String>
+                        <x:String>http://www.dummy.com</x:String>
+                    </ComboBox.Items>
+                </ComboBox>
 
-            <!--  ContentPanel - place additional content here  -->
-            <Grid Grid.Row="1" Margin="12,0,12,0">
-                <StackPanel>
-                    <Button Click="PortalSignInOnClick" Content="Portal Sign In" />
-                    <Button Click="IWAPortalSignInOnClick" Content="IWA Portal Sign In" />
-                    <Button Click="AccessSecuredServiceOnClick" Content="Access Secured Servce" />
-                    <Button Click="SignOutOnClick" Content="Sign Out" />
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="SignInButton"
+                            Margin="5,0,5,0"
+                            VerticalAlignment="Center"
+                            Command="{Binding SignInOutCommand}"
+                            Content="Sign In" />
+                    <ProgressRing Width="50" IsActive="{Binding IsBusy}" />
                 </StackPanel>
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="5"
+                           VerticalAlignment="Center"
+                           Text="Logged as : " />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Margin="5"
+                           Text="{Binding LoginName}" />
+
+                <Image Grid.Row="3"
+                       Grid.Column="1"
+                       Width="100"
+                       Height="100"
+                       Margin="5"
+                       Source="{Binding ArcGISPortal.CurrentUser.ThumbnailUri}" />
+
+                <StackPanel Grid.Row="4" Grid.Column="0">
+                    <Button Click="TestPortalOnClick" Content="TestPortal" IsEnabled="{Binding IsAvailable}" />
+                    <!--  <Button Click="IWAPortalSignInOnClick" Content="IWA Portal Sign In" />  -->
+                    <Button Click="AccessSecuredServiceOnClick" Content="Access Secured Service" />
+                    <Button Click="AccessFederatedFeatureServiceOnClick" Content="Access Federated Feature Service" />
+                </StackPanel>
+
             </Grid>
         </Grid>
     </Grid>
