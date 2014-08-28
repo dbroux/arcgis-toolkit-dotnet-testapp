@@ -22,12 +22,9 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 	/// </summary>
 	public sealed partial class SignInDialogSample : Page, INotifyPropertyChanged
 	{
-		//public const string PortalUrl = "http://www.arcgis.com/sharing/rest";
 		public const string PortalIWAUrl = "https://portaliwa.esri.com/gis/sharing/rest";
 		public const string SecuredServiceUrl = "http://serverapps101.esri.com/arcgis/rest/services/USStatesUser1/MapServer";
 		public const string FederatedFeatureServiceUrl = "http://services.arcgis.com/pmcEyn9tLWCoX7Dm/arcgis/rest/services/Test_feature_service_DBX/FeatureServer/0";
-
-		private static WinPhoneChallengeHandler _challengeHandler; // to remove when ChallengeHandler checked in
 
 		public SignInDialogSample()
 		{
@@ -43,9 +40,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 				im.RemoveCredential(crd);
 
 			// Initialize challenge handler to allow storage in the credential locker and restore the credentials
-			_challengeHandler = new WinPhoneChallengeHandler { AllowSaveCredentials = true, CredentialSaveOption = CredentialSaveOption.Selected }; // set it to CredentialSaveOption.Hidden if it's not an user choice
-			im.ChallengeMethod = _challengeHandler.CreateCredentialAsync;
-			//PortalUrl = "http://www.arcgis.com/sharing/rest/dummy";
+			im.ChallengeHandler = new WinPhoneChallengeHandler { AllowSaveCredentials = true, CredentialSaveOption = CredentialSaveOption.Selected }; // set it to CredentialSaveOption.Hidden if it's not an user choice
 		}
 
 		// Input parameter = portal url
@@ -138,11 +133,9 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 			// Remove all credentials (even those for external services, hosted services, federated services) from IM and from the CredentialLocker
 			foreach (var crd in IdentityManager.Current.Credentials.ToArray())
 				IdentityManager.Current.RemoveCredential(crd);
-			//var defaultChallengeHandler = IdentityManager.Current.ChallengeHandler as WinPhoneChallengeHandler;
-			//if (defaultChallengeHandler != null)
-			//	defaultChallengeHandler.ClearCredentialsCache(); // remove stored credentials
-			if (_challengeHandler != null)
-				_challengeHandler.ClearCredentialsCache(); // remove stored credentials
+			var challengeHandler = IdentityManager.Current.ChallengeHandler as WinPhoneChallengeHandler;
+			if (challengeHandler != null)
+				challengeHandler.ClearCredentialsCache(); // remove stored credentials
 
 			// Create the portal without any credential (though we might still be logged if portal is secured with PKI/IWA (i.e actually not possible to logout))
 			await CreatePortalAsync(false);
@@ -181,13 +174,11 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 
 			ArcGISPortal = null;
 			Exception error = null;
-			//var challengeHandler = IdentityManager.Current.ChallengeHandler;
-			var challengeHandler = IdentityManager.Current.ChallengeMethod;
+			var challengeHandler = IdentityManager.Current.ChallengeHandler;
 			if (!withChallenge)
 			{
 				// Deactivate the challenge handler temporarily before creating the portal (else challengehandler would be called for portal secured by native)
-				//IdentityManager.Current.ChallengeHandler = new ChallengeHandler(crd => null);  // = null; Null should work once IM will always be active
-				IdentityManager.Current.ChallengeMethod = info => null;
+				IdentityManager.Current.ChallengeHandler = null;
 			}
 
 			ArcGISPortal portal = null;
@@ -201,8 +192,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 			}
 
 			if (!withChallenge)
-				//IdentityManager.Current.ChallengeHandler = challengeHandler; // Restore ChallengeHandler
-				IdentityManager.Current.ChallengeMethod = challengeHandler;
+				IdentityManager.Current.ChallengeHandler = challengeHandler; // Restore ChallengeHandler
 			else if (error != null)
 				await new MessageDialog("Error: " + error.Message).ShowAsync();
 
