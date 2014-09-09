@@ -92,10 +92,10 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Internal
         {
             string url = "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Military/FeatureServer/" + (_index + 2);
             _index = ++_index % 5;
-            var ft = new GeodatabaseFeatureServiceTable(new Uri(url)) { UseAdvancedSymbology = true };
+            var ft = new ServiceFeatureTable(new Uri(url)){ UseAdvancedSymbology = true };
             var featureLayer = new FeatureLayer(ft);
             await featureLayer.InitializeAsync();
-            featureLayer.DisplayName = ((GeodatabaseFeatureServiceTable)featureLayer.FeatureTable).ServiceInfo.Name;
+            featureLayer.DisplayName = ft.ServiceInfo.Name;
             LogMessage("Added Layer " + Utils.GetLayerName(featureLayer));
             //featureLayer.MinScale = MyMapView.Scale * 4;
             //featureLayer.MaxScale = MyMapView.Scale / 4;

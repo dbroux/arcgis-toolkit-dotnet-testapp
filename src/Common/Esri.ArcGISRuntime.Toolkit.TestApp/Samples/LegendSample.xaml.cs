@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
@@ -40,7 +41,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyLegend);
             ObjectTracker.Track(MyMapView);
             Utils.TrackMap(MyMap);
-			MyMap.InitialViewpoint = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
+            MyMap.InitialViewpoint = new ViewpointExtent(new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator));
         }
 
         private void OnLegendRefreshed(object sender, Controls.Legend.RefreshedEventArgs e)
@@ -87,7 +88,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 				Envelope extent = layer.ServiceInfo.InitialExtent ?? layer.ServiceInfo.InitialExtent;
 				if (extent != null)
 				{
-					if (!SpatialReference.AreEqual(extent.SpatialReference, MyMapView.SpatialReference))
+					if (MyMapView.SpatialReference != null && !MyMapView.SpatialReference.IsEqual(extent.SpatialReference))
 						extent = GeometryEngine.Project(extent, MyMapView.SpatialReference) as Envelope;
 					if (extent != null)
 					{

@@ -3,6 +3,7 @@
 // Please see http://go.microsoft.com/fwlink/?LinkID=131993 for details.
 // All other rights reserved.
 
+using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Toolkit.TestApp.Internal;
@@ -36,7 +37,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
             ObjectTracker.Track(MyTemplatePicker);
             ObjectTracker.Track(MyMapView);
             Utils.TrackMap(MyMap);
-			MyMap.InitialViewpoint = new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator);
+            MyMap.InitialViewpoint = new ViewpointExtent(new Envelope(-15000000, 0, -5000000, 10000000, SpatialReferences.WebMercator));
         }
 
         private void TemplatePicker_OnTemplatePicked(object sender, Controls.TemplatePicker.TemplatePickedEventArgs e)

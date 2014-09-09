@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\MultiplicationConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ObjectToObjectConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\StringJoinConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\DelegateCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\ObjectTracker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\TocControl.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Internal\Utils.cs" />
