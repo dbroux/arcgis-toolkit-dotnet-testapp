@@ -20,13 +20,13 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class SignInDialogSample : Page, INotifyPropertyChanged
+	public sealed partial class SignInChallengeHandlerSample : Page, INotifyPropertyChanged
 	{
 		public const string PortalIWAUrl = "https://portaliwa.esri.com/gis/sharing/rest";
 		public const string SecuredServiceUrl = "http://serverapps101.esri.com/arcgis/rest/services/USStatesUser1/MapServer";
 		public const string FederatedFeatureServiceUrl = "http://services.arcgis.com/pmcEyn9tLWCoX7Dm/arcgis/rest/services/Test_feature_service_DBX/FeatureServer/0";
 
-		public SignInDialogSample()
+		public SignInChallengeHandlerSample()
 		{
 			DataContext = this;
 			var _ = new NavigationHelper(this);
@@ -40,7 +40,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 				im.RemoveCredential(crd);
 
 			// Initialize challenge handler to allow storage in the credential locker and restore the credentials
-			im.ChallengeHandler = new WinPhoneChallengeHandler { AllowSaveCredentials = true, CredentialSaveOption = CredentialSaveOption.Selected }; // set it to CredentialSaveOption.Hidden if it's not an user choice
+			im.ChallengeHandler = new SignInChallengeHandler { AllowSaveCredentials = true, CredentialSaveOption = CredentialSaveOption.Selected }; // set it to CredentialSaveOption.Hidden if it's not an user choice
 		}
 
 		// Input parameter = portal url
@@ -50,11 +50,11 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 			set { SetValue(PortalUrlProperty, value); }
 		}
 
-		public static readonly DependencyProperty PortalUrlProperty = DependencyProperty.Register("PortalUrl", typeof(string), typeof(SignInDialogSample), new PropertyMetadata(null, OnPortalUrlChanged));
+		public static readonly DependencyProperty PortalUrlProperty = DependencyProperty.Register("PortalUrl", typeof(string), typeof(SignInChallengeHandlerSample), new PropertyMetadata(null, OnPortalUrlChanged));
 
 		static void OnPortalUrlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
-			var _ = ((SignInDialogSample)d).OnPortalUrlChanged();
+			var _ = ((SignInChallengeHandlerSample)d).OnPortalUrlChanged();
 		}
 
 		private async Task OnPortalUrlChanged()
@@ -133,7 +133,7 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 			// Remove all credentials (even those for external services, hosted services, federated services) from IM and from the CredentialLocker
 			foreach (var crd in IdentityManager.Current.Credentials.ToArray())
 				IdentityManager.Current.RemoveCredential(crd);
-			var challengeHandler = IdentityManager.Current.ChallengeHandler as WinPhoneChallengeHandler;
+			var challengeHandler = IdentityManager.Current.ChallengeHandler as SignInChallengeHandler;
 			if (challengeHandler != null)
 				challengeHandler.ClearCredentialsCache(); // remove stored credentials
 
@@ -211,7 +211,16 @@ namespace Esri.ArcGISRuntime.Toolkit.TestApp.Samples
 		private async void AccessSecuredServiceOnClick(object sender, RoutedEventArgs e)
 		{
 			var layer = new ArcGISDynamicMapServiceLayer { ServiceUri = SecuredServiceUrl };
-			await layer.InitializeAsync();
+			string message = "OK";
+			try
+			{
+				await layer.InitializeAsync();
+			}
+			catch (Exception ex)
+			{
+				message = "Error: " + ex.Message;
+			}
+			await new MessageDialog(message).ShowAsync();
 		}
 		private async void AccessFederatedFeatureServiceOnClick(object sender, RoutedEventArgs e)
 		{
